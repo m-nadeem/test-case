@@ -1,0 +1,19 @@
+.custom-list {
+    /* Default custom list styles */
+    padding: 20px;
+    background-color: #f0f2f5;
+  }
+  
+  .custom-list .ant-list-item {
+    border-bottom: 1px solid #d9d9d9;
+  }
+  
+  .custom-list .ant-list-item:last-child {
+    border-bottom: none;
+  }
+  
+  .custom-list.my-custom-list {
+    /* Specific styles for custom className */
+    border: 2px solid #1890ff;
+  }
+  
