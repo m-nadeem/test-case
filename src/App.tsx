@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import { Button, Input, Modal } from 'antd';
@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import CustomMenu from './components/menu/CustomMenu';
 import CustomFooter from './components/footer/CustomFooter';
 import { UserAddOutlined } from '@ant-design/icons';
+import { get } from './shared/Api';
 
 const usersData = [
   {
@@ -101,13 +102,7 @@ const App = () => {
     border: 1px solid #d9d9d9;
   `;
 
-  const [state, setState] = useState({
-    users: usersData,
-    selectedUser: null,
-    isModalVisible: false,
-    newUserName: '',
-    isEditMode: false
-  } as IAppData);
+  const [state, setState] = useState({} as IAppData);
 
   const showModal = (user: IUser | null = null): void => {
     setState(prevState => ({
@@ -160,6 +155,20 @@ const App = () => {
   const handleCancel = (): void => {
     setState(prevState => ({ ...prevState, isModalVisible: false }))
   }
+
+  useEffect(() =>{
+    console.log("in use effect")
+    get().then(data => {
+      console.log(data);
+      setState({
+      users: data,
+      selectedUser: null,
+      isModalVisible: false,
+      newUserName: '',
+      isEditMode: false
+    } as IAppData); 
+  });
+  },[])
 
   return (
     <StyledLayout>
